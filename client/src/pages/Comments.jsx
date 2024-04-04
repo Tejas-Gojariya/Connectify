@@ -61,8 +61,8 @@ const Comments = () => {
       <Post post={post} />
 
       <div className="px-4 py-1.5 rounded-md">
-        <div className="flex gap-3 px-4 bg-gray-100 dark:bg-[#061728] rounded-md py-2">
-          <div className="w-11 h-11">
+        <div className="flex gap-3 px-4 bg-gray-100 dark:bg-[#1f2937] rounded-md py-2">
+          <div className="w-11 h-11 mt-5">
             <img
               src="https://www.pngall.com/wp-content/uploads/12/Avatar-Profile-PNG-Images.png"
               alt=""
@@ -70,19 +70,12 @@ const Comments = () => {
             />
           </div>
 
-          <div className="flex flex-col gap-2 w-full">
+          <div className="flex p-5 rounded-md flex-col gap-2 w-full">
             <div className="flex justify-between items-center gap-2">
-              <div className="flex gap-5">
+              <div className="flex gap-2">
                 <span className="dark:text-white">{currentUser?.username}</span>
                 <span className="dark:text-white">{currentUser?.handle}</span>
               </div>
-
-              {/* <div>
-                <DeleteForeverOutlinedIcon
-                  fontSize="small"
-                  className="cursor-pointer"
-                />
-              </div> */}
             </div>
 
             <div className="relative">
@@ -92,7 +85,7 @@ const Comments = () => {
                 onChange={(e) => setDesc(e.target.value)}
                 value={desc}
                 placeholder="Write your comment here"
-                className="w-full rounded-md bg-[#e4e4e5] border-gray-500 border dark:bg-[#44688200] dark:text-white text-black px-3 py-1.5 outline-none"
+                className="w-full rounded-md mt-3 bg-[#e4e4e5] border-gray-500 border dark:bg-[#44688200] dark:text-white text-black px-3 py-1.5 outline-none"
               />
               <button
                 onClick={handleCreateComment}
