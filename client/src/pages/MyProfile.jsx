@@ -6,12 +6,20 @@ import { toast, Toaster } from "react-hot-toast";
 import newRequest from "../utils/newRequest";
 import { useNavigate } from "react-router-dom";
 import { logout } from "../redux/userSlice";
+import { useForm } from "react-hook-form";
 
 const MyProfile = () => {
   const [openEditProfile, setOpenEditProfile] = useState(false);
   const [profileImg, setProfileImage] = useState(null);
-
   const { currentUser } = useSelector((state) => state.user);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = (data) => console.log(data);
 
   useEffect(() => {
     const toTop = () => {
@@ -33,9 +41,10 @@ const MyProfile = () => {
 
   const handleLogout = async (e) => {
     try {
+      toast.success("Logout out successfully!!");
       await newRequest.get("auth/logout");
       dispatch(logout());
-      toast.success("Loggod out successfully!");
+      console.log("logout successfully");
       navigate("/login");
     } catch (error) {
       toast.error(error?.response?.data?.message);
@@ -76,48 +85,32 @@ const MyProfile = () => {
           </div>
 
           <div className="flex justify-evenly w-3/4 gap-1">
-            <div className="flex flex-col items-center dark:text-gray-200">
+            <div className="flex flex-col tracking-wider items-center dark:text-gray-200">
               <h2>Posts</h2>
               <h3 className="">{myPosts?.length}</h3>
             </div>
             <div className="flex items-center">
               <span className="block w-[1px] h-8 bg-gray-500"></span>
             </div>
-            <div className="flex flex-col items-center dark:text-gray-200">
+            <div className="flex flex-col tracking-wider items-center dark:text-gray-200">
               <h2>Followers</h2>
               <h3 className="">{currentUser?.followers?.length}</h3>
             </div>
             <div className="flex items-center">
               <span className="block w-[1px] h-8 bg-gray-500"></span>
             </div>
-            <div className="flex flex-col items-center dark:text-gray-200">
+            <div className="flex flex-col tracking-wider items-center dark:text-gray-200">
               <h2>Following</h2>
               <h3 className="">{currentUser?.followings?.length}</h3>
             </div>
           </div>
         </div>
-
-        {/* <div className="flex justify-evenly w-3/4 gap-1">
-          <div className="flex items-center dark:text-gray-200">
-            <h2>Bio :</h2>
-            <h3 className="">hello</h3>
+        <div className="flex-col p-5 rounded-md bg-slate-600">
+          <div className="flex-col items-center dark:text-gray-200">
+            <p>test : </p>
           </div>
-        </div> */}
-        <div className="flex items-center dark:text-gray-200">
-          <h2>Bio :</h2>
-          <h3 className=""></h3>
         </div>
-        <div className="flex items-center dark:text-gray-200">
-          <h2>Name :</h2>
-          <h3 className=""></h3>
-        </div>
-        <div className="flex items-center dark:text-gray-200">
-          <h2>Email :</h2>
-          <h3 className=""></h3>
-        </div>
-        <div className="flex items-center dark:text-gray-200">
-          <h2>Number :</h2>
-        </div>
+
         <div className=" p-2  rounded-lg flex justify-between text-sm text-gray-200">
           <button
             onClick={() => setOpenEditProfile(true)}
@@ -175,29 +168,11 @@ const MyProfile = () => {
                         Are you sure you want to edit your profile?
                       </p>
                       <div className="mt-2">
-                        <form className="flex flex-col">
-                          {/* <div className="bg-gray-100 flex flex-row justify-center items-center my-1 py-1.5 px-2 rounded text-sm">
-                            <input
-                              className=" bg-gray-100 py-1 px-2 w-full outline-none text-black"
-                              type="text"
-                              placeholder="New Username"
-                            />
-                          </div> */}
-                          {/* <div className="bg-gray-100 flex flex-row justify-center items-center my-1 py-1.5 px-2 rounded text-sm">
-                            <input
-                              className=" bg-gray-100 py-1 px-2 w-full outline-none text-black"
-                              type="text"
-                              placeholder="New handle"
-                            />
-                          </div> */}
-                          {/* <div className="bg-gray-100 flex flex-row justify-center items-center my-1 py-1.5 px-2 rounded text-sm">
-                            <input
-                              className=" bg-gray-100 py-1 px-2 w-full outline-none text-black"
-                              type="text"
-                              placeholder="email"
-                            />
-                          </div> */}
-                          <div className="bg-gray-800 border border-gray-600 flex flex-row justify-start mb-5 items-center my-1 py-1.5 px-2 text-sm rounded">
+                        <form
+                          onSubmit={handleSubmit(onSubmit)}
+                          className=" max-w-md pt-5 mx-auto"
+                        >
+                          <div className="bg-gray-800 mt-5 border border-gray-600 flex flex-row justify-start mb-5 items-center my-1 py-1.5 px-2 text-sm rounded">
                             <img
                               src={
                                 profileImg
@@ -226,80 +201,136 @@ const MyProfile = () => {
                             <input
                               type="text"
                               className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                              {...register("Bio", {
+                                required: true,
+                                maxLength: 50,
+                              })}
                             />
                             <label className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
                               Bio
                             </label>
+                            {errors.Bio && (
+                              <p className="text-rose-600 font-semibold text-xs">
+                                Bio is required
+                              </p>
+                            )}
                           </div>
                           <div className="grid md:grid-cols-2 md:gap-6">
                             <div className="relative z-0 w-full mb-5 group">
                               <input
                                 type="text"
+                                {...register("Username", {
+                                  required: true,
+                                  maxLength: 10,
+                                })}
                                 className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300   dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
                               />
                               <label className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
-                                First name
+                                User name
                               </label>
+
+                              {errors.Username && (
+                                <p className="text-rose-600 font-semibold text-xs">
+                                  Please check your First Name
+                                </p>
+                              )}
                             </div>
                             <div className="relative z-0 w-full mb-5 group">
                               <input
                                 type="text"
                                 className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                                {...register("handler", {
+                                  required: true,
+                                  maxLength: 10,
+                                })}
                               />
-
+                              {errors.handler && (
+                                <p className="text-rose-600 font-semibold text-xs">
+                                  Please check your last name
+                                </p>
+                              )}
                               <label className=" absolute text-sm text-gray-500  duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
-                                Last name
+                                Handler
                               </label>
                             </div>
                           </div>
                           <div className="relative  z-0 w-full mb-5 group">
                             <input
                               type="email"
+                              pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$"
                               className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                              {...register("email", {
+                                required: true,
+                              })}
                             />
                             <label className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
                               Email address
                             </label>
+                            {errors.email && (
+                              <p className="text-rose-600 font-semibold text-xs ">
+                                Email is required
+                              </p>
+                            )}
                           </div>
+
                           <div className="grid md:grid-cols-2 md:gap-6">
                             <div className="relative z-0 w-full mb-5 group">
                               <input
                                 type="tel"
                                 className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                                {...register("mobile", {
+                                  required: true,
+                                  maxLength: 10,
+                                })}
                               />
                               <label className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
                                 Phone number
                               </label>
+                              {errors.mobile && (
+                                <p className="text-rose-600 font-semibold text-xs">
+                                  Conform your mobile number
+                                </p>
+                              )}
                             </div>
                             <div className="relative z-0 w-full mb-5 group">
                               <input
-                                type="date"
+                                type="text"
                                 className="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none dark:text-white dark:border-gray-600 dark:focus:border-blue-500 focus:outline-none focus:ring-0 focus:border-blue-600 peer"
+                                {...register("dob", {
+                                  required: true,
+                                  maxLength: 10,
+                                })}
                               />
                               <label className="peer-focus:font-medium absolute text-sm text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:start-0 rtl:peer-focus:translate-x-1/4 peer-focus:text-blue-600 peer-focus:dark:text-blue-500 peer-placeholder-shown:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">
-                                DOB
+                                interest
                               </label>
+                              {errors.dob && (
+                                <p className="text-rose-600 font-semibold text-xs">
+                                  Enter Your interest
+                                </p>
+                              )}
                             </div>
+                          </div>
+
+                          <div className="bg-gray-800 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+                            <button
+                              type="submit"
+                              className="inline-flex w-full justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm"
+                            >
+                              Edit Confirm
+                            </button>
+                            <button
+                              type="button"
+                              onClick={() => setOpenEditProfile(false)}
+                              className="mt-3 inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+                            >
+                              Cancel
+                            </button>
                           </div>
                         </form>
                       </div>
                     </div>
                   </div>
-                </div>
-                <div className="bg-gray-800 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
-                  <button
-                    type="button"
-                    className="inline-flex w-full justify-center rounded-md border border-transparent bg-red-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm"
-                  >
-                    Edit Confirm
-                  </button>
-                  <button
-                    type="button"
-                    onClick={() => setOpenEditProfile(false)}
-                    className="mt-3 inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
-                  >
-                    Cancel
-                  </button>
                 </div>
               </div>
             </div>
@@ -312,7 +343,12 @@ const MyProfile = () => {
         </h5>
 
         {myPosts.length === 0 ? (
-          <div className="text-white px-16 py-4">No Posts yet.</div>
+          <div
+            className="text-white px-16 py-4 font-semibold tracking-wide
+          text-xl"
+          >
+            No Posts yet.
+          </div>
         ) : (
           myPosts.map((post) => <Post key={post?._id} post={post} />)
         )}
