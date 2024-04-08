@@ -71,7 +71,7 @@ const CenterHome = () => {
           <h6 className="font-semibold text-lg">Home</h6>
         </div>
 
-        <div className="px-8 flex gap-3 bg-gray-800 p-4 m-4 rounded-md border border-gray-700 pb-3">
+        <div className="px-8 flex gap-3 dark:bg-gray-800 bg-white p-4 m-4 rounded-md border border-black dark:border-gray-700 pb-3">
           <div className="w-11 h-11">
             <img
               src="https://www.pngall.com/wp-content/uploads/12/Avatar-Profile-PNG-Images.png"
@@ -80,14 +80,14 @@ const CenterHome = () => {
             />
           </div>
 
-          <div className="flex bg-gray-800 flex-col gap-2 w-full">
+          <div className="flex dark:bg-gray-800 bg-white flex-col gap-2 w-full">
             <div>
               <textarea
                 placeholder="What's happening?"
                 rows={3}
                 onChange={(e) => setTitle(e.target.value)}
                 value={title}
-                className="border-2  border-gray-500 px-3 py-1.5 w-full rounded-md dark:bg-[#12345600] bg-[#e4e4e5]"
+                className="border-2 dark:border-gray-500 px-3 py-1.5 w-full rounded-md dark:bg-transparent bg-[#e4e4e5]"
               />
             </div>
 

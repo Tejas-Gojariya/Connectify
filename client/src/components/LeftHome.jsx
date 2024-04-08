@@ -44,8 +44,8 @@ const LeftHome = () => {
   };
 
   return (
-    <div className="flex sticky  px-8 p-5 justify-center border-r-2 border-gray-500 min-h-screen dark:bg-[#05192c] dark:text-white bg-[#e4e4e5]">
-      <div className="flex flex-col border-gray-600  bg-gray-800 text-white rounded-md p-10 gap-10 sticky top-0">
+    <div className="flex-1 sticky justify-center border-r-2 border-gray-500 min-h-screen dark:bg-[#05192c] dark:text-white bg-[#e4e4e5]">
+      <div className="flex flex-col m-10 border-gray-600 bg-gray-100 dark:bg-gray-800 dark:text-white rounded-md p-10 gap-10 sticky top-0">
         {/* Top logo section  */}
         <Link to="/">
           <div className="flex gap-5 text-3xl items-center justify-center">
@@ -100,12 +100,11 @@ const LeftHome = () => {
               <h5 className="font-semibold text-xl">Profile</h5>
             </div>
           </Link>
-
-          </div>
+        </div>
 
         {/* logout area  */}
         <div className="flex gap-5 mx-auto">
-          <div className="flex gap-2 bg-gray-600 px-16 flex-start py-2 rounded-md items-center">
+          <div className="flex gap-2 dark:bg-gray-600 pl-5 px-16 flex-start py-2 rounded-md items-center">
             <div className="border-2 border-black dark:border-white rounded-full w-11 h-11">
               <img
                 src="https://www.pngall.com/wp-content/uploads/12/Avatar-Profile-PNG-Images.png"

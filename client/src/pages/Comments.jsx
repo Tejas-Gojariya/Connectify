@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { toast } from "react-hot-toast";
+// import { toast } from "react-hot-toast";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import Comment from "../components/Comment";
 import Post from "../components/Post";
 import newRequest from "../utils/newRequest";
+import { toast, Toaster } from "react-hot-toast";
 
 const Comments = () => {
   const postId = useParams();
@@ -34,7 +35,13 @@ const Comments = () => {
         postId: postId.id,
         desc,
       });
-      toast.success("Comment created!");
+      toast.success("Comment created successfully!", {
+        style: {
+          borderRadius: "10px",
+          background: "#333",
+          color: "#fff",
+        },
+      });
       setDesc("");
     } catch (error) {
       console.log(error);
@@ -96,6 +103,7 @@ const Comments = () => {
             </div>
           </div>
         </div>
+        <Toaster />
       </div>
 
       {allComments?.map((comment) => (

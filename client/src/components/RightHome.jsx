@@ -56,19 +56,22 @@ const RightHome = () => {
 
   return (
     <div className="flex-1 min-h-screen dark:bg-[#061728] dark:text-white bg-[#e4e4e5]">
-      <div className="flex flex-col gap-2 sticky top-0">
+      <div className="flex flex-col m-6 dark:bg-gray-800 rounded-lg gap-2 sticky top-0">
         <div className="flex gap-2 border rounded-full items-center border-gray-500 mx-8 my-4">
           <SearchOutlinedIcon className="ml-2 text-gray-400" />
           <input
             type="text"
             placeholder="Search posts"
-            className="border-none outline-none w-full px-2 py-1.5 rounded-full dark:bg-[#061728] bg-[#e4e4e5]"
+            className="border-none outline-none w-full px-2 py-1.5 rounded-full dark:bg-[#06172800] bg-[#e4e4e5]"
           />
         </div>
 
-        <div className="flex flex-col gap-3 px-8 border-b border-gray-500 pb-3">
+        <div className="flex flex-col gap-3 px-4 border-b border-gray-500 pb-3">
           {users.map((user) => (
-            <div className="flex justify-between items-center" key={user?._id}>
+            <div
+              className="flex justify-between bg-zinc-100 dark:bg-gray-700 p-2 rounded-md items-center"
+              key={user?._id}
+            >
               <div className="flex gap-2 items-center">
                 <div className="border-2 border-black dark:border-white rounded-full w-11 h-11">
                   <img
@@ -103,25 +106,25 @@ const RightHome = () => {
           <div className="fixed inset-0 z-10 overflow-y-auto">
             <div className="flex min-h-full items-center justify-center p-4 text-center sm:items-center sm:p-0">
               <div className="relative transform overflow-hidden rounded-lg bg-white text-left shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg my-10">
-                <div className="bg-gray-800 px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
+                <div className="dark:bg-gray-800 px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                   <div className="sm:flex sm:items-start">
-                    <div className="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-red-800 sm:mx-0 sm:h-10 sm:w-10">
+                    <div className="mx-auto flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full dark:bg-red-800 sm:mx-0 sm:h-10 sm:w-10">
                       <GroupIcon />
                     </div>
                     <div className="mt-3 text-center  sm:mt-0 sm:ml-4 sm:text-left">
                       <h3
-                        className="text-lg font-medium leading-6 text-gray-400"
+                        className="text-lg font-medium leading-6 dark:text-gray-400"
                         id="modal-title"
                       >
                         More Request
                       </h3>
-                      <p className="text-sm text-gray-500">
+                      <p className="text-sm dark:text-gray-500">
                         Lorem ipsum dolor sit amet.
                       </p>
                       <div className="mt-2">
                         <form className="flex flex-col">
-                          <div className="bg-gray-800 flex flex-row justify-start mb-5 items-center my-1 text-sm rounded">
-                            <div className="flex gap-2 pl-5 pr-16 py-1 bg-gray-600 rounded-md items-center">
+                          <div className="dark:bg-gray-800 pt-5 flex flex-row justify-start mb-5 items-center my-1 text-sm rounded">
+                            <div className="flex gap-2 pl-5 pr-16 py-1 dark:bg-gray-600 rounded-md items-center">
                               <div className="border-2 border-black dark:border-white rounded-full w-9 h-9">
                                 <img
                                   src="https://www.pngall.com/wp-content/uploads/12/Avatar-Profile-PNG-Images.png"
@@ -134,9 +137,6 @@ const RightHome = () => {
                                 <span className="text-sm">test</span>
                                 <span className="text-sm">@test_user</span>
                               </div>
-                              <div className="flex justify-center items-center bg-zinc-900 border border-black dark:border-white rounded-full w-9 h-9">
-                                <PersonAddAlt1Icon className="w-full h-full object-cover" />
-                              </div>
                             </div>
                           </div>
                         </form>
@@ -144,11 +144,11 @@ const RightHome = () => {
                     </div>
                   </div>
                 </div>
-                <div className="bg-gray-800 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
+                <div className="dark:bg-gray-800 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
                   <button
                     type="button"
                     onClick={() => setOpenEditProfile(false)}
-                    className="mt-3 inline-flex w-full justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
+                    className="mt-3 inline-flex w-full justify-center rounded-md border border-gray-300 dark:bg-white px-4 py-2 text-base font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 sm:mt-0 sm:ml-3 sm:w-auto sm:text-sm"
                   >
                     Cancel
                   </button>
@@ -161,13 +161,10 @@ const RightHome = () => {
         <div className="flex flex-col gap-3 bg-gray-100 dark:bg-[#30353b00] mx-4 px-4 my-2 py-2 rounded-md">
           <div className="flex flex-col gap-2">
             {news?.map((n) => (
-              <div
-                key={n?._id}
-                className="flex bg-gray-700 rounded-md px-5 py-3 items-center pb-2"
-              >
+              <div key={n?._id} className="flex rounded-md items-center pb-2">
                 <div className="flex-[2]">
-                  <h6 className="font-semibold">{n?.title.slice(0, 20)}...</h6>
-                  <p className="text-xs">{n?.desc.slice(0, 40)}...</p>
+                  <h6 className="font-semibold">{n?.title.slice(0, 22)}...</h6>
+                  <p className="text-xs">{n?.desc.slice(0, 72)}...</p>
                 </div>
 
                 <div className="flex-1 w-12 h-full">

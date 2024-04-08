@@ -6,7 +6,7 @@ function Share() {
   return (
     <div className="flex rounded-md ">
       <div className="flex items-center">
-        <div className="flex ml-5 justify-start bg-gray-600 rounded-full">
+        <div className="flex ml-5 justify-start dark:bg-gray-600  rounded-full">
           <a
             href="https://linkedin.com/"
             title="LinkedIn"

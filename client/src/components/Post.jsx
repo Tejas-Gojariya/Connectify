@@ -74,7 +74,7 @@ const Post = ({ post }) => {
   return (
     <div>
       <div className="flex gap-3 pb-7 px-8">
-        <div className="flex bg-gray-800 pl-4 pr-10 pt-2 rounded-md flex-col gap-2 w-full">
+        <div className="flex dark:bg-gray-800 border  bg-white dark:border-gray-700 pl-4 pr-10 pt-2 rounded-md flex-col gap-2 w-full">
           <div className="flex justify-between items-center gap-2">
             <div className="flex flex-col">
               <div className="flex gap-1 items-center">
@@ -91,7 +91,7 @@ const Post = ({ post }) => {
                   <span className="dark:text-white font-semibold pl-5 pt-3 pb-5">
                     {user?.username}
                   </span>{" "}
-                  <span className="dark:text-gray-500 00 pl-1 pt-3 pb-5 ">
+                  <span className="dark:text-gray-500  00 pl-1 pt-3 pb-5 ">
                     {user?.handle}
                   </span>
                 </div>
@@ -162,10 +162,7 @@ const Post = ({ post }) => {
               </div>
             )}
 
-            <div
-              className="flex gap-1 items-center text-white"
-              title="Add to Bookmarks"
-            >
+            <div className="flex gap-1 items-center " title="Add to Bookmarks">
               <BookmarkAddOutlinedIcon />
             </div>
             <div className="flex items-center" title="Share">

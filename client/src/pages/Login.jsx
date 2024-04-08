@@ -5,6 +5,7 @@ import HttpsOutlinedIcon from "@mui/icons-material/HttpsOutlined";
 import newRequest from "../utils/newRequest";
 import { useDispatch } from "react-redux";
 import { loginStart, loginSuccess, loginFailure } from "../redux/userSlice";
+import { toast, Toaster } from "react-hot-toast";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -21,6 +22,9 @@ const Login = () => {
       const res = await newRequest.post("auth/login", { email, password });
       dispatch(loginSuccess(res.data));
       console.log(res.data);
+      toast.success("login suceessfully");
+
+      console.log("login successfull");
       navigate("/");
     } catch (error) {
       dispatch(loginFailure());
@@ -95,6 +99,7 @@ const Login = () => {
           </div>
         </div>
       </div>
+      <Toaster />
     </div>
   );
 };

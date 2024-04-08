@@ -15,7 +15,7 @@ function Notification() {
       </div>
 
       {/* login success notification */}
-      <div className="bg-gray-800 items-center m-5 px-2 rounded-md text-white p-5 flex justify-center">
+      <div className="dark:bg-gray-800 bg-white items-center m-5 px-2 rounded-md text-black dark:text-white p-5 flex justify-center">
         <HowToRegIcon className="" />
         <h1 className="text-lg pl-5 pr-1 text-blue-600 font-semibold">
           {currentUser?.username} &nbsp;
@@ -25,7 +25,7 @@ function Notification() {
       </div>
 
       {/* like post notification */}
-      <div className="bg-gray-800 items-center m-5 px-2 rounded-md text-white p-5 flex justify-center">
+      <div className="dark:bg-gray-800 bg-white dark:text-white items-center m-5 px-2 rounded-md text-black p-5 flex justify-center">
         <MarkChatUnreadIcon className="" />
         <h1 className="text-lg pl-5 pr-1 font-semibold">
           {currentUser?.handle}

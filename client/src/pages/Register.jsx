@@ -29,6 +29,7 @@ const Register = () => {
         password,
       });
       dispatch(loginSuccess(res.data));
+      toast.success("your singup successfull")
       console.log(res.data);
       navigate("/");
     } catch (error) {
@@ -40,8 +41,8 @@ const Register = () => {
 
   return (
     <div>
-      <div className="bg-gray-800 p-4 md:p-8 h-screen lg:p-12 flex justify-center">
-        <div className="w-full max-w-md mx-auto mt-8 mb-8 p-6 md:p-10 bg-gray-900 text-white rounded-md shadow-md ">
+      <div className="bg-gray-800 p-4 md:p-8 h-full lg:p-12 flex justify-center">
+        <div className="w-full max-w-md mx-auto mt-8 mb-8 p-6 md:p-10 bg-gray-900 text-white rounded-md shadow-md">
           <img
             className="pb-5 bg-inherit"
             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR39DFDhRL6mSEjr86fJG4F0VdRgvulyY1aYw&usqp=CAU"
@@ -49,10 +50,10 @@ const Register = () => {
             width={200}
             alt="Logo"
           />
-          <p className="font-semibold flex text-2xl">
-            welcome to Connectify..!! 🖐
+          <p className="font-semibold flex text-xl">
+            Welcome to Connectify..!! 🖐
           </p>
-          <p className="font-semibold flex text-zinc-400	pb-6">
+          <p className="font-semibold text-sm flex text-zinc-400	pb-6">
             Please Signup your account and start adventure
           </p>
           <h2 className="text-start text-xl mb-5 text-white">
@@ -114,14 +115,13 @@ const Register = () => {
                 Register
               </button>
             </div>
+            <div className="text-lg text-gray-500 text-center">
+              <Link to="/login">
+                Already have an account!
+                <span className="text-gray-300 font-bold"> Login</span>
+              </Link>
+            </div>
           </form>
-
-          <div className="text-lg text-gray-500 text-center">
-            <Link to="/login">
-              Already have an account!
-              <span className="text-gray-300 font-bold"> Login</span>
-            </Link>
-          </div>
         </div>
       </div>
       <Toaster />
