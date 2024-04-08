@@ -8,7 +8,48 @@ function Other() {
         <ManageAccountsIcon />
         <h6 className="font-semibold text-lg">Others</h6>
       </div>
-      <h1 className="text-white p-5">hello</h1>
+      <div className="py-12">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="bg-[#3c3f4c] rounded-lg p-8 flex justify-between items-center">
+            <div className="flex flex-col">
+              <span className="text-white text-lg font-semibold">
+                Ready to get started?
+              </span>
+              <span className=" text-white text-2xl font-bold my-2">
+                Level-up with our Pro Plan.
+              </span>
+              <span className="text-gray-300">
+                Our intuitive drag'n drop interface will have you designing and
+                building interfaces quicker than ever before.
+              </span>
+            </div>
+            <button className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-primary/90 h-10 px-4 py-2 bg-[#000000] dark:bg-black text-white">
+              Get Started for $15/mo
+            </button>
+          </div>
+          <div className="mt-8 bg-[#3c3f4c] rounded-lg p-8">
+            <div className="flex flex-col">
+              <span className="text-white text-lg font-semibold mb-2">
+                Stay in the loop
+              </span>
+              <span className="text-gray-300 mb-4">
+                Join our mailing list to stay in the know about new updates and
+                features.
+              </span>
+              <form className="flex">
+                <input
+                  type="email"
+                  className="flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 flex-1"
+                  placeholder="Email"
+                />
+                <button className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-primary/90 h-10 px-4 py-2 bg-black dark:bg-[#000000] text-white ml-2">
+                  Subscribe
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

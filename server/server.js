@@ -13,6 +13,8 @@ import commentRoute from "./routes/commentRoutes.js";
 import User from "./models/user.js";
 import Post from "./models/post.js";
 import Profile from "./models/Profile.js";
+import email from "./models/email.js";
+import Email from "./models/email.js";
 
 const app = express();
 dotenv.config();
@@ -36,10 +38,11 @@ app.use("/api/upload", uploadRoute);
 app.use("/api/comments", commentRoute);
 
 // upload a profile
+
 app.post("/api/profile", async(req, res) => {
     console.log("profile data is updated");
     try {
-        const { bio, handle, username, email, number, other } = req.body;
+        const { bio, handle, username, email, number, interest } = req.body;
 
         const userProfile = new Profile({
             bio,
@@ -47,7 +50,7 @@ app.post("/api/profile", async(req, res) => {
             username,
             email,
             number,
-            other,
+            interest,
         });
         await userProfile.save();
 
@@ -58,14 +61,32 @@ app.post("/api/profile", async(req, res) => {
     }
 });
 
+// email subscribe
+app.post("/api/email", async(req, res) => {
+    console.log("email address is require");
+    try {
+        const { email } = req.body;
+
+        const emailschema = new Email({
+            email,
+        });
+        await emailschema.save();
+
+        res.status(201).json({ message: "user email subscribe successfully" });
+    } catch (error) {
+        console.error("Error uploading user email:", error);
+        res.status(500).json({ error: "Internal server error" });
+    }
+});
+
 // update User
 app.patch("/api/profile/:id", async(req, res) => {
     try {
         const profileId = req.params.id;
-        const { username, handle, bio } = req.body;
+        const { username, handle, bio, email, number, interest } = req.body;
 
         const updatedProfile = await Profile.findByIdAndUpdate(
-            profileId, { username, handle, bio }, { new: true }
+            profileId, { username, handle, bio, email, number, interest }, { new: true }
         );
         if (!updatedProfile) {
             return res.status(404).send("Profile Not define");
@@ -118,8 +139,7 @@ app.delete("/api/delete/:id", async(req, res) => {
 });
 
 // Post Delete By Id
-app.delete("/posts/:id", async(req, res) => {
-    console.log("delete post successfully");
+app.delete("/api/posts/:id", async(req, res) => {
     try {
         const postId = req.params.id;
         const post = await Post.findByIdAndDelete(postId);
@@ -129,18 +149,9 @@ app.delete("/posts/:id", async(req, res) => {
         }
 
         res.status(200).send("Post deleted successfully");
+        console.log("delete post successfully");
     } catch (error) {
         res.status(500).send(error.message);
-    }
-});
-
-// count All post
-app.get("/api/countAllPost", async(req, res) => {
-    try {
-        const datanumber = await Post.countDocuments();
-        res.send(`We have ${datanumber} users in 'post' collection`);
-    } catch (error) {
-        res.status(500).json({ message: error.message });
     }
 });
 
