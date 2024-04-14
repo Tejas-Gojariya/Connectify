@@ -13,7 +13,6 @@ import commentRoute from "./routes/commentRoutes.js";
 import User from "./models/user.js";
 import Post from "./models/post.js";
 import Profile from "./models/Profile.js";
-import email from "./models/email.js";
 import Email from "./models/email.js";
 
 const app = express();
@@ -38,7 +37,6 @@ app.use("/api/upload", uploadRoute);
 app.use("/api/comments", commentRoute);
 
 // upload a profile
-
 app.post("/api/profile", async(req, res) => {
     console.log("profile data is updated");
     try {
