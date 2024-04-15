@@ -13,14 +13,11 @@ router.post("/", protect, createPost);
 
 router.get("/", protect, myPosts);
 
-
 // get all posts
 router.get("/random", protect, getRandomPosts);
 
-
-// 
-router.delete("/: ", protect, deletePost);
-
+// Delete Post
+router.delete("/:", protect, deletePost);
 
 // get one Posts
 router.get("/:postId", protect, getPostById);
